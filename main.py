@@ -2,10 +2,12 @@ import requests
 from pprint import pprint
 import telegram
 import os, random
+from dotenv import load_dotenv
 from time import sleep
-api_key = "xJJxN6YcIogipDjWUaBalfQjKS8hdnH50exX9rcO"
+load_dotenv()
+api_key = os.getenv("API_KEY")
 params = {
-        'api_key':'xJJxN6YcIogipDjWUaBalfQjKS8hdnH50exX9rcO',
+        'api_key': api_key,
 }
 while True:
     texnik_get_picture = f'https://api.nasa.gov/planetary/apod'
@@ -29,7 +31,7 @@ while True:
             file.write(pictur.content)
 
 
-    bot = telegram.Bot(token= "5419320482:AAEnTVVK4k14CDCqqkKfdivGu-AsuaOoNwY")
+    bot = telegram.Bot(token = os.getenv("TOKEN"))
     f = random.choice(os.listdir(f'imagest'))
     with open (f'imagest/{f}', "rb") as file:
         bot.send_photo("@nasddd", file)
