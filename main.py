@@ -5,7 +5,7 @@ import os, random
 from dotenv import load_dotenv
 from time import sleep
 load_dotenv()
-api_key = os.getenv("API_KEY")
+api_key = os.getenv("NASA_TOKEN")
 params = {
         'api_key': api_key,
 }
@@ -31,10 +31,11 @@ while True:
             file.write(pictur.content)
 
 
-    bot = telegram.Bot(token = os.getenv("TOKEN"))
+    bot = telegram.Bot(token = os.getenv("TG_TOKEN"))
+    tg_chat_id = os.getenv("TG_CHAT_ID")
     f = random.choice(os.listdir(f'imagest'))
     with open (f'imagest/{f}', "rb") as file:
-        bot.send_photo("@nasddd", file)
+        bot.send_photo(tg_chat_id, file)
     for phata in os.listdir(f'imagest'):
         os.remove(f'imagest/{phata}')
     sleep(120)
